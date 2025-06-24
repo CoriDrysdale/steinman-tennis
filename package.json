@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@tailwindcss/postcss": "^4.1.10",
     "firebase": "^11.9.1",
     "next": "15.3.4",
