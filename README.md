@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Tennis round robin tournament generator, hosted by Firebase.
 
-## Getting Started
+## Where the code lives
 
-First, run the development server:
+Most of the code is in src/app/page.js
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+The page title and description (window/tab title) is in src/app/layout.js and can be changed there.
+
+The icon used next to the window/tab title is inside the public/ directory. If you want to change it, put a new image inside of public/, and set the `icons` value in src/app/layout.js to match the image filename.
+
+
+## How to develop
+
+You can make changes and test inside the browser by:
+
+1. Opening the command prompt
+2. Enter `cd steinman-tennis` to go inside the project directory
+3. Enter `npm install` and press return
+3. Enter `npm run dev` and press return
+4. Open your browser and go to [http://localhost:3000](http://localhost:3000)
+
+Now if you make any changes to the code, you should be able to see what the result is in the browser.
+
+
+## How to deploy
+
+For the first time, you'll have to install Firebase tools. Open your command prompt and run:
+
+```
+npm install -g firebase-tools
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then login to Firebase with:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+firebase login
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+From then on, you should be able to skip those steps.
 
-## Learn More
+When you're ready to deploy, you can create a build for the project that can be deployed by running:
 
-To learn more about Next.js, take a look at the following resources:
+```
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Then you should be able to deploy the changes with:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+firebase deploy --only hosting
+```
 
-## Deploy on Vercel
+## Making more changes with Gemini
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+You can keep working on changing the app with Gemini using the contents in src/app/page.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Unfortunately, there's some incompatibility between what the real website expects and what Gemini's canvas expects. We need real Firebase variables for the website to run, but Gemini is using fake ones in the background, and the real ones seem to really be confusing it.
+
+Don't be too worried if Gemini says "Something went wrong" -  everything seems to be running just fine despite that message.
+
+It may also be a good idea to directly tell Gemini in your message something like "Do not touch the Firebase or Gemini API key variables." I noticed that Gemini seems to like to remove the real variables, especially `geminiApiKey`. If they are removed, then clicking on the buttons in the website will throw an error. The AI buttons will not work if it removes the `geminiApiKey`.
+
+I put the code that initializes the important variables in `src/app/analytics-variables.js` as a backup. You can paste it back in if Gemini removes it. The values are also stored in `.env.local`.
+
+
+## Testing
+
+After Gemini makes changes
+
+- Test that the buttons do not throw an error
+- Test that the AI buttons do not throw an error and show AI responses properly formatted
+- Test score entry
