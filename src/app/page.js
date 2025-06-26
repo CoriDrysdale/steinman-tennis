@@ -1163,7 +1163,7 @@ const App = () => {
             `}</style>
 
             <div className="max-w-4xl mx-auto">
-                <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8">Tennis Tournament Manager</h1>
+                <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8">Steinman Tennis Tournament Manager</h1>
 
                 {/* Message Display */}
                 {message.text && (
